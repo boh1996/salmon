@@ -66,6 +66,7 @@ var conversions = [
 	]},
 	{unit: "mm2", conversions: [
 		{unit: 	"m2", calc: "x / 1000 / 1000"}
+	]},
 	{unit: "sm2", conversions: [
 		{unit: 	"m2", calc: "x * 0.71 * 0.71"}
 	]},
