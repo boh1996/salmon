@@ -49,8 +49,23 @@ var conversions = [
 
 	// Area
 	{unit: "m2", conversions: [
+		{unit: 	"km2", calc: "x / 1000 / 1000"},
+		{unit: 	"dm2", calc: "x * 10 * 10"},
+		{unit: 	"cm2", calc: "x * 100 * 100"},
+		{unit: 	"mm2", calc: "x * 1000 * 1000"},
 		{unit: 	"sm2", calc: "x / 0.71 / 0.71"}
 	]},
+	{unit: "km2", conversions: [
+		{unit: 	"m2", calc: "x * 1000 * 1000"}
+	]},
+	{unit: "dm2", conversions: [
+		{unit: 	"m2", calc: "x / 10 / 10"}
+	]},
+	{unit: "cm2", conversions: [
+		{unit: 	"m2", calc: "x / 100 / 100"}
+	]},
+	{unit: "mm2", conversions: [
+		{unit: 	"m2", calc: "x / 1000 / 1000"}
 	{unit: "sm2", conversions: [
 		{unit: 	"m2", calc: "x * 0.71 * 0.71"}
 	]},
