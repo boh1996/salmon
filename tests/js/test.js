@@ -1,3 +1,9 @@
+test( "Non Salmon Length", function() {
+  ok( 1 == "1", "Passed!" );
+});
+
+
+/*
 var obj;
 obj = convert(5, "km", "m");
 console.log("5 km to m: " + obj.converted + " " + obj.outUnit);
@@ -16,3 +22,4 @@ console.log("500 millimeters to centimeters: " + obj.converted + " " + obj.outUn
 
 obj = convert(1, "m", "sm");
 console.log("1 meter to salmon meter: " + obj.converted + " " + obj.outUnit);
+*/
