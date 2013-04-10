@@ -1,0 +1,45 @@
+<script type="text/javascript">
+	var conversions = [
+		{unit: "m", conversions: [
+			{unit: 	"dm", calc: "x * 10"},
+			{unit: 	"cm", calc: "x * 100"},
+			{unit: 	"mm", calc: "x * 1000"}
+		]},
+		{unit: "dm", conversions: [
+			{unit: 	"m", calc: "x / 10"}
+		]},
+		{unit: "cm", conversions: [
+			{unit: 	"m", calc: "x / 100"}
+		]},
+		{unit: "mm", conversions: [
+			{unit: 	"m", calc: "x / 1000"}
+		]}
+	];
+
+	var paths = {
+	};
+	console.log(conversions);
+
+	var conversionsLength = conversions.length;
+	for (var i = 0; i <= conversionsLength - 1; i++) {
+		var conversion = conversions[i];
+		var unit = conversion.unit;
+		
+		var conversionLength = conversion.conversions.length;
+		for (var j = 0; j <= conversionLength - 1; j++) {
+			var singleConversion = conversion.conversions[j];
+			console.log(unit, singleConversion);
+		}
+	}
+	addToPath("m_dm", [], "");
+	console.log("Paths", paths);
+
+	function checkForRoute () {}
+
+	function addToPath (units, steps, calc) {
+		if (typeof paths[units] == "undefined") {
+			paths[units] = {steps: steps, calc: calc};
+		}
+	}
+
+</script>
