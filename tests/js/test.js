@@ -1,5 +1,13 @@
+
 test( "Non Salmon Length", function() {
-  ok( 1 == "1", "Passed!" );
+	ok( convert( 5000, "m", "km" ).converted == 5, "m->km" );
+	ok( convert( 5, "m", "dm" ).converted == 50, "m->dm" );
+	ok( convert( 5,	"m", "cm" ).converted == 500, "m->cm" );
+	ok( convert( 5,	"m", "mm" ).converted == 5000, "m->mm" );
+	ok( convert( 5,	"km", "m" ).converted == 5000, "km->m" );
+	ok( convert( 5,	"dm", "m" ).converted == 0.5, "dm->m" );
+	ok( convert( 5,	"cm", "m" ).converted == 0.05, "cm->m" );
+	ok( convert( 5,	"mm", "m" ).converted == 0.005, "mm->m" );
 });
 
 
