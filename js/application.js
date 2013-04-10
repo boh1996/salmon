@@ -17,20 +17,10 @@ function identifyComponents ( string ) {
 
 	if ( shortComponents != components[0] ) {
 
-		var concatComponents = Array();
-		concatComponents.push(shortComponents[0]);
-		concatComponents.push(shortComponents[1]);
-
 		components.splice(0, 1);
-		components = concatComponents.concat(components);
+		components = shortComponents.concat(components);
 
-		var returnValue = identifyComponents(components.join(" "));
-
-		if ( typeof shortComponents[2] !== "undefined" && returnValue !== false ) {
-			returnValue.after = shortComponents[2];
-		}
-
-		return returnValue;
+		return identifyComponents(components.join(" "));
 	}
 
 	// The minimum number of components is 2, a amount and a starting unt
@@ -123,13 +113,8 @@ function processInput ( input ) {
 	if ( components === false ) return; // Show Error 
 
 	var result = convert(components.amount, components.fromUnit, components.toUnit);
-	console.log(result);
-	if ( result === false ) return; // Show Error
 
-	if ( typeof components.after !== "undefined" ) {
-		var evalString = result.converted + components.after;
-		result.converted = eval(evalString);
-	}
+	if ( result === false ) return; // Show Error
 
 	$(".giant-input").val(result.converted + result.outUnit);
 }
