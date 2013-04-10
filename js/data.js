@@ -21,12 +21,16 @@ var conversions = {
 };
 
 var acronyms = {
-	"milimeter" : "mm",
-	"milimeters" : "mm",
-	"centimeter" : "cm",
-	"centimeters" : "cm",
-	"meter" : "m",
-	"meters" : "m",
-	"kilometer" : "km",
-	"kilometers" : "km",
+	"milimeter" 	: "mm",
+	"milimeters" 	: "mm",
+	"centimeter" 	: "cm",
+	"centimeters" 	: "cm",
+	"meter" 		: "m",
+	"meters" 		: "m",
+	"kilometer" 	: "km",
+	"kilometers" 	: "km",
+	"salmon meter" 	: "sm",
+	"salmonmeter" 	: "sm",
+	"salmon meters" : "sm",
+	"salmonmeters" 	: "sm"
 }
