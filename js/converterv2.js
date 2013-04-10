@@ -39,7 +39,7 @@ function convert (inUnit, outUnit, value) {
 		x = eval(calc[i]);
 	}
 
-	return x;
+	return {converted: x, inUnit: inUnit, outUnit: outUnit};
 }
 
 function combine (v1, v2) {

@@ -122,8 +122,8 @@ function processInput ( input ) {
 
 	if ( components === false ) return; // Show Error 
 
-	var result = window.converter.convert(components.amount, components.fromUnit, components.toUnit);
-
+	var result = convert(components.fromUnit, components.toUnit, components.amount);
+	console.log(result);
 	if ( result === false ) return; // Show Error
 
 	if ( typeof components.after !== "undefined" ) {
