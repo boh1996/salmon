@@ -1,4 +1,16 @@
 window.converter = {
+
+	/**
+	 * Converts one unit to another,
+	 * if no direct conversion exists,
+	 * then it converts it to a base unit,
+	 * and then from the base unit to the output unit
+	 * 
+	 * @param  {integer} amount  The amount of inUnit to convert
+	 * @param  {string} inUnit  The name or abbrevation of the unit that amount is
+	 * @param  {string} outUnit The name or abbrevation of the unit to convert amount to
+	 * @return {integer|boolean|object}         An object containing, inUnit, outUnit, converted and amount
+	 */
 	convert : function ( amount, inUnit, outUnit ) {
 		var convertedInUnit = false;
 
@@ -21,10 +33,12 @@ window.converter = {
 			}
 		}
 
+		// If a direct route exists, find it
 		directConvertion = this.findObject(conversions[inUnit], function ( obj, container ) {
 			return container[obj].toUnit == outUnit; 
 		});
 
+		// If no direct convertion exists, find a route
 		if ( directConvertion === false ) {
 
 			// Searches through the available units that "inUnit" can convert to, for the object that can convert "inUnit" to a base unit,
@@ -34,6 +48,7 @@ window.converter = {
 
 			if ( baseObject === false ) return 400;
 
+			// If the input and output units is the same
 			if ( baseObject.toUnit == inUnit ) {
 				convertedInUnit = amount;
 			} else {
