@@ -75,7 +75,7 @@ function identifyComponents ( string ) {
  * @return {string|array}        The input string or an array of components
  */
 function shortMatch ( string ) {
-	var matches = string.match(/^([0-9+\-()^*\/.]+)([a-zA-Z])+/);
+	var matches = string.match(/^([0-9+\-()^*\/.]+)([a-zA-Z]+)/);
 	
 	if ( matches == null ) {
 		return string;
@@ -96,14 +96,33 @@ function shortMatch ( string ) {
  	return returnArray;
 }
 
+/**
+ * Processes the user input
+ * 
+ * @param  {string} input The users input
+ */
+function processInput ( input ) {
+	if ( input.length == 0 ) return false; // Show Error
+
+	var components = identifyComponents(input);
+
+	if ( components === false ) return; // Show Error 
+
+	var result = window.converter.convert(components.amount, components.fromUnit, components.toUnit);
+
+	if ( result === false ) return; // Show Error
+
+	$(".giant-input").val(result.converted + result.outUnit);
+}
+
 $(document).ready( function () {
 	$(".giant-button").click(function () {
-		if ( $(".giant-input").val().length == 0 ) return false; // Show Error
+		return processInput($(".giant-input").val());
+	});
 
-		var components = identifyComponents($(".giant-input").val());
-
-		if ( components === false ) return; // Show Error 
-
-		console.log();
+	$(".giant-input").keypress( function ( e ) {
+		if ( e.which == 13 ) {
+			processInput($(".giant-input").val());
+		}
 	});
 });

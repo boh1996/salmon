@@ -29,7 +29,7 @@ window.converter = {
 				outUnit = acronyms[outUnit];
 			} else {
 				// Error : "Sorry unit not found!";
-				return 404;
+				return false;
 			}
 		}
 
@@ -46,7 +46,7 @@ window.converter = {
 				return container[obj].base === true;
 			});
 
-			if ( baseObject === false ) return 400;
+			if ( baseObject === false ) return false;
 
 			// If the input and output units is the same
 			if ( baseObject.toUnit == inUnit ) {
@@ -60,7 +60,7 @@ window.converter = {
 						return container[obj].toUnit == outUnit;
 					});
 
-					if ( object == false ) return 400;
+					if ( object == false ) return false;
 
 					var x = convertedInUnit;
 					convertedInUnit = eval(object.difference);
