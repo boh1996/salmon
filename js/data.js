@@ -82,6 +82,22 @@ var conversions = [
 	{unit: "sm3", conversions: [
 		{unit: 	"m3", calc: "x * 0.71 * 0.71 * 0.71"}
 	]},
+
+	//Temperature
+	{unit: "c", conversions: [
+		{unit: 	"k", calc: "x + 273.15"},
+		{unit: 	"f", calc: "x * 1.8 + 32"},
+		{unit: 	"st", calc: "x / 12"}
+	]},
+	{unit: "k", conversions: [
+		{unit: 	"c", calc: "x - 273.15"}
+	]},
+	{unit: "f", conversions: [
+		{unit: 	"c", calc: "(x - 32) / 1.8"}
+	]},
+	{unit: "st", conversions: [
+		{unit: 	"c", calc: "x * 12"}
+	]},
 ];
 
 var acronyms = {
