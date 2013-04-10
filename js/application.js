@@ -77,7 +77,7 @@ function identifyComponents ( string ) {
  * @return {string|array}        The input string or an array of components
  */
 function shortMatch ( string ) {
-	var matches = string.match(/([0-9+\-()^*\/.]+)([a-zA-Z0-9]+)/);
+	var matches = string.match(/([0-9+\-()^\*\/.]+)([a-zA-Z0-9]+)?/);
 	
 	if ( matches == null || typeof matches === "undefined" ) {
 		return string;
