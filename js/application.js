@@ -3,6 +3,7 @@
  * and identifies the starting amonnt and unit and the ending unit
  *
  * @todo Add a system that automaticly identifies the endUnit from the starting unit if none is deffined
+ * @todo Add options to act as a normal calculator
  * @param  {string} string The user input string
  * @return {boolean|object}        False is returned if the input isn't valid, if success an object containing a fromUnit, a toUnit and the amount is returned
  */
@@ -12,17 +13,28 @@ function identifyComponents ( string ) {
 	var components = string.split(" ");
 	var length = components.length;
 
-	// The minimum number of components is 2, a amount and a starting unt
-	if ( length < 2 ) return false;
-
 	var shortComponents = shortMatch(components[0]);
 
 	if ( shortComponents != components[0] ) {
-		components.splice(0, 1);
-		components = shortComponents.concat(components);
 
-		return identifyComponents(components.join(" "));
+		var concatComponents = Array();
+		concatComponents.push(shortComponents[0]);
+		concatComponents.push(shortComponents[1]);
+
+		components.splice(0, 1);
+		components = concatComponents.concat(components);
+
+		var returnValue = identifyComponents(components.join(" "));
+
+		if ( typeof shortComponents[2] !== "undefined" && returnValue !== false ) {
+			returnValue.after = shortComponents[2];
+		}
+
+		return returnValue;
 	}
+
+	// The minimum number of components is 2, a amount and a starting unt
+	if ( length < 2 ) return false;
 
 	// The amount is alwayst the first component, use eval on it to alow calculations
 	try {
@@ -75,9 +87,9 @@ function identifyComponents ( string ) {
  * @return {string|array}        The input string or an array of components
  */
 function shortMatch ( string ) {
-	var matches = string.match(/^([0-9+\-()^*\/.]+)([a-zA-Z]+)/);
+	var matches = string.match(/([0-9+\-()^*\/.]+)([a-zA-Z]+)([0-9+\-()^*\/.]+)?/);
 	
-	if ( matches == null ) {
+	if ( matches == null || typeof matches === "undefined" ) {
 		return string;
 	}
 
@@ -90,7 +102,9 @@ function shortMatch ( string ) {
  			break;
  		}
 
- 		returnArray.push(matches[comp].trim());
+ 		if ( comp !== undefined && matches[comp] !== undefined ) {
+ 			returnArray.push(matches[comp].trim());
+ 		}
  	}
 
  	return returnArray;
@@ -111,6 +125,11 @@ function processInput ( input ) {
 	var result = window.converter.convert(components.amount, components.fromUnit, components.toUnit);
 
 	if ( result === false ) return; // Show Error
+
+	if ( typeof components.after !== "undefined" ) {
+		var evalString = result.converted + components.after;
+		result.converted = eval(evalString);
+	}
 
 	$(".giant-input").val(result.converted + result.outUnit);
 }
