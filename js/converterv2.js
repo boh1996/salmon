@@ -38,7 +38,7 @@ function convert (inUnit, outUnit, value) {
 	for (var i = 0; i <= calcLength - 1; i++) {
 		x = eval(calc[i]);
 	}
-	console.log(calc);
+
 	return x;
 }
 

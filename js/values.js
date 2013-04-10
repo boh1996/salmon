@@ -1,9 +1,13 @@
 var conversions = [
 	{unit: "m", conversions: [
+		{unit: 	"km", calc: "x / 1000"},
 		{unit: 	"dm", calc: "x * 10"},
 		{unit: 	"cm", calc: "x * 100"},
 		{unit: 	"mm", calc: "x * 1000"},
 		{unit: 	"sm", calc: "x / 0.71"}
+	]},
+	{unit: "km", conversions: [
+		{unit: 	"m", calc: "x * 1000"}
 	]},
 	{unit: "dm", conversions: [
 		{unit: 	"m", calc: "x / 10"}
