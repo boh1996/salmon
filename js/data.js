@@ -1,28 +1,43 @@
-var conversions = {
-	"mm" : 	[
-		{"toUnit" 	: "m","difference" 	: "x * 0.001", 		"base" 	: true	}
-	],
-	"cm" : 	[
-		{"toUnit" 	: "m","difference" 	: "x * 0.01", 		"base" 	: true	}
-	],
-	"km" : 	[
-		{"toUnit" 	: "m","difference" 	: "x * 1000", 		"base" 	: true	}
-	],
-	"sm" : 	[
-		{"toUnit" 	: "m","difference" 	: "x * 0.71", 		"base" 	: true	}
-	],
-	"m" : 	[
-		{"toUnit" 	: "m"	, "difference" 	: "x * 1", 		"base" 	: true	},
-		{"toUnit" 	: "mm"	, "difference" 	: "x * 1000"					},
-		{"toUnit" 	: "cm"	, "difference" 	: "x * 100"						},
-		{"toUnit" 	: "km"	, "difference" 	: "x * 0.001"					},
-		{"toUnit"	: "sm"	, "difference"	: "x / 0.71"					},
-	]
-};
+var conversions = [
+	{unit: "m", conversions: [
+		{unit: 	"km", calc: "x / 1000"},
+		{unit: 	"dm", calc: "x * 10"},
+		{unit: 	"cm", calc: "x * 100"},
+		{unit: 	"mm", calc: "x * 1000"},
+		{unit: 	"sm", calc: "x / 0.71"}
+	]},
+	{unit: "km", conversions: [
+		{unit: 	"m", calc: "x * 1000"}
+	]},
+	{unit: "dm", conversions: [
+		{unit: 	"m", calc: "x / 10"}
+	]},
+	{unit: "cm", conversions: [
+		{unit: 	"m", calc: "x / 100"}
+	]},
+	{unit: "mm", conversions: [
+		{unit: 	"m", calc: "x / 1000"}
+	]},
+	{unit: "sm", conversions: [
+		{unit: 	"m", calc: "x * 0.71"},
+		{unit: 	"dsm", calc: "x * 10"},
+		{unit: 	"csm", calc: "x * 100"},
+		{unit: 	"msm", calc: "x * 1000"}
+	]},
+	{unit: "dsm", conversions: [
+		{unit: 	"sm", calc: "x / 10"}
+	]},
+	{unit: "csm", conversions: [
+		{unit: 	"sm", calc: "x / 100"}
+	]},
+	{unit: "msm", conversions: [
+		{unit: 	"sm", calc: "x / 1000"}
+	]}
+];
 
 var acronyms = {
-	"milimeter" 	: "mm",
-	"milimeters" 	: "mm",
+	"millimeter" 	: "mm",
+	"millimeters" 	: "mm",
 	"centimeter" 	: "cm",
 	"centimeters" 	: "cm",
 	"meter" 		: "m",

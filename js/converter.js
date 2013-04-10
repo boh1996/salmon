@@ -1,101 +1,84 @@
-window.converter = {
+var paths = {
+};
 
-	/**
-	 * Converts one unit to another,
-	 * if no direct conversion exists,
-	 * then it converts it to a base unit,
-	 * and then from the base unit to the output unit
-	 * 
-	 * @param  {integer} amount  The amount of inUnit to convert
-	 * @param  {string} inUnit  The name or abbrevation of the unit that amount is
-	 * @param  {string} outUnit The name or abbrevation of the unit to convert amount to
-	 * @return {integer|boolean|object}         An object containing, inUnit, outUnit, converted and amount
-	 */
-	convert : function ( amount, inUnit, outUnit ) {
-		var convertedInUnit = false;
+var conversionsLength = conversions.length;
+for (var i = 0; i <= conversionsLength - 1; i++) {
+	var conversion = conversions[i];
+	var unit = conversion.unit;
+	
+	var conversionLength = conversion.conversions.length;
+	for (var j = 0; j <= conversionLength - 1; j++) {
+		var singleConversion = conversion.conversions[j];
+		var steps = [unit, singleConversion.unit];
+		var calc = [singleConversion.calc];
+		addToPath(combine(unit, singleConversion.unit), steps, calc);
+		
+		checkForRoute(unit, singleConversion.unit, steps, calc);
+	}
+}
 
-		// Translates the output unit into the correct abbrevation, makes it possible to use centimeters as output unit
-		if	( typeof conversions[inUnit]  == "undefined" ) {
-			if ( typeof acronyms[inUnit] != "undefined" ) {
-				inUnit = acronyms[inUnit];
-			} else {
-				return 404;
-			}
-		}
+console.log("Paths", paths);
 
-		// Translates the input unit into the correct abbrevation, makes it possible to use meters/kilometers as input unit
-		if ( typeof conversions[outUnit] == "undefined" ) {
-			if ( typeof acronyms[outUnit] != "undefined" ) {
-				outUnit = acronyms[outUnit];
-			} else {
-				// Error : "Sorry unit not found!";
-				return false;
-			}
-		}
+function convert (value, inUnit, outUnit) {
+	if (typeof acronyms[inUnit] !== "undefined") {
+		inUnit = acronyms[inUnit];
+	}
+	if (typeof acronyms[outUnit] !== "undefined") {
+		outUnit = acronyms[outUnit];
+	}
 
-		// If a direct route exists, find it
-		directConvertion = this.findObject(conversions[inUnit], function ( obj, container ) {
-			return container[obj].toUnit == outUnit; 
-		});
+	var combinedUnits = combine(inUnit, outUnit);
+	if (typeof paths[combinedUnits] === "undefined")
+		return false;
 
-		// If no direct convertion exists, find a route
-		if ( directConvertion === false ) {
+	var calc = paths[combinedUnits].calc;
+	var calcLength = calc.length;
+	var x = value;
 
-			// Searches through the available units that "inUnit" can convert to, for the object that can convert "inUnit" to a base unit,
-			baseObject = this.findObject(conversions[inUnit], function ( obj, container ) {
-				return container[obj].base === true;
-			});
+	for (var i = 0; i <= calcLength - 1; i++) {
+		x = eval(calc[i]);
+	}
 
-			if ( baseObject === false ) return false;
+	return {converted: x, inUnit: inUnit, outUnit: outUnit};
+}
 
-			// If the input and output units is the same
-			if ( baseObject.toUnit == inUnit ) {
-				convertedInUnit = amount;
-			} else {
-				var x = amount;
-				convertedInUnit = eval(baseObject.difference);
+function combine (v1, v2) {
+	return v1 + "_" + v2;
+}
 
-				if ( baseObject.toUnit != outUnit ) {
-					var object = this.findObject(conversions[baseObject.toUnit], function ( obj, container ) {
-						return container[obj].toUnit == outUnit;
-					});
+function checkForRoute (startUnit, currentUnit, steps, calc) {
+	var conversionsLength = conversions.length;
+	for (var i = 0; i <= conversionsLength - 1; i++) {
+		var conversion = conversions[i];
+		var unit = conversion.unit;
 
-					if ( object == false ) return false;
+		if (unit == currentUnit) {
+			var conversionLength = conversion.conversions.length;
+			for (var j = 0; j <= conversionLength - 1; j++) {
+				var newSteps = steps.slice();
+				var newCalc = calc.slice();
+				var singleConversion = conversion.conversions[j];
+				var singleConversionUnit = singleConversion.unit;
+				if (startUnit !== singleConversionUnit && steps.indexOf(singleConversionUnit) == -1) {
+					newSteps.push(singleConversionUnit);
+					newCalc.push(singleConversion.calc);
+					addToPath(combine(startUnit, singleConversionUnit), newSteps, newCalc);
 
-					var x = convertedInUnit;
-					convertedInUnit = eval(object.difference);
+					checkForRoute(startUnit, singleConversionUnit, newSteps, newCalc);
 				}
 			}
-		} else {
-			var x = amount;
-			convertedInUnit = eval(directConvertion.difference);
+
+			break;
 		}
+	}
+}
 
-		return {
-			"inUnit" : inUnit,
-			"amount" : amount,
-			"converted" : convertedInUnit,
-			"outUnit" : outUnit
-		};
-	},
-
-	/**
-	 * Searches a container, 
-	 * and matches each element with the callback function
-	 * 
-	 * @param  {object|Array}   findIn   The container to find something in
-	 * @param  {Function} callback The callback function to use
-	 * @return {boolean|object}
-	 */
-	findObject : function ( findIn, callback ) {
-		if ( typeof callback !== "function" ) return false;
-
-		for ( var obj in findIn ) {
-			if ( callback(obj, findIn) === true ) {
-				return findIn[obj];
-			}
-		};
-
-		return false;
+function addToPath (units, steps, calc) {
+	if (typeof paths[units] === "undefined") {
+		paths[units] = {steps: steps, calc: calc};
+	} else {
+		if (steps.length < paths[units].steps) {
+			paths[units] = {steps: steps, calc: calc};
+		}
 	}
 }

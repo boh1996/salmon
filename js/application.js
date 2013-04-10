@@ -122,7 +122,7 @@ function processInput ( input ) {
 
 	if ( components === false ) return; // Show Error 
 
-	var result = convert(components.fromUnit, components.toUnit, components.amount);
+	var result = convert(components.amount, components.fromUnit, components.toUnit);
 	console.log(result);
 	if ( result === false ) return; // Show Error
 
