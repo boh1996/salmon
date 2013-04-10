@@ -7,7 +7,7 @@ window.converter = {
 			if ( typeof acronyms[inUnit] != "undefined" ) {
 				inUnit = acronyms[inUnit];
 			} else {
-				return;
+				return 404;
 			}
 		}
 
@@ -16,9 +16,8 @@ window.converter = {
 			if ( typeof acronyms[outUnit] != "undefined" ) {
 				outUnit = acronyms[outUnit];
 			} else {
-				console.log("No input unit found!");
 				// Error : "Sorry unit not found!";
-				return;
+				return 404;
 			}
 		}
 
