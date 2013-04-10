@@ -121,5 +121,8 @@ var acronyms = {
 	"salmon meter" 	: "sm",
 	"salmonmeter" 	: "sm",
 	"salmon meters" : "sm",
-	"salmonmeters" 	: "sm"
+	"salmonmeters" 	: "sm",
+	"celcius"		: "c",
+	"kelvin"		: "k",
+	"fahrenheit"	: "",
 }
