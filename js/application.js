@@ -100,6 +100,10 @@ function shortMatch ( string ) {
  	return returnArray;
 }
 
+var fpFix = function (n) {
+    return Math.round(n * 1000000000000000)/1000000000000000;
+};
+
 /**
  * Processes the user input
  * 
@@ -116,7 +120,7 @@ function processInput ( input ) {
 
 	if ( result === false ) return; // Show Error
 
-	$(".giant-input").val(result.converted + result.outUnit);
+	$(".giant-input").val(fpFix(result.converted) + result.outUnit);
 }
 
 $(document).ready( function () {

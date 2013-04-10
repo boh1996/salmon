@@ -7,6 +7,7 @@ var conversions = [
 		{unit: 	"mm", calc: "x * 1000"},
 		{unit: 	"in", calc: "x * 0.0254"},
 		{unit: 	"ft", calc: "x * 0.3048"},
+		{unit: 	"mi", calc: "x / 1.609344"},
 		{unit: 	"sm", calc: "x / 0.71"}
 	]},
 	{unit: "km", conversions: [
@@ -26,6 +27,9 @@ var conversions = [
 	]},
 	{unit: "ft", conversions: [
 		{unit: 	"m", calc: "x / 0.3048"}
+	]},
+	{unit: "mi", conversions: [
+		{unit: 	"m", calc: "x * 1.609344"}
 	]},
 	{unit: "sm", conversions: [
 		{unit: 	"m", calc: "x * 0.71"},
@@ -81,6 +85,7 @@ var conversions = [
 ];
 
 var acronyms = {
+//	""				: "",
 	"millimeter" 	: "mm",
 	"millimeters" 	: "mm",
 	"centimeter" 	: "cm",
@@ -89,6 +94,14 @@ var acronyms = {
 	"meters" 		: "m",
 	"kilometer" 	: "km",
 	"kilometers" 	: "km",
+	"liter"			: "l",
+	"liters"		: "l",
+	"inch"			: "in",
+	"inches"		: "in",
+	"foot"			: "ft",
+	"feet"			: "ft",
+	"mile"			: "mi",
+	"miles"			: "mi",
 	"salmon meter" 	: "sm",
 	"salmonmeter" 	: "sm",
 	"salmon meters" : "sm",
