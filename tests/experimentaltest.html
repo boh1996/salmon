@@ -1,9 +1,11 @@
 <script type="text/javascript">
+	// {unit: 	"", calc: "x"},
 	var conversions = [
 		{unit: "m", conversions: [
 			{unit: 	"dm", calc: "x * 10"},
 			{unit: 	"cm", calc: "x * 100"},
-			{unit: 	"mm", calc: "x * 1000"}
+			{unit: 	"mm", calc: "x * 1000"},
+			{unit: 	"sm", calc: "x / 0.71"}
 		]},
 		{unit: "dm", conversions: [
 			{unit: 	"m", calc: "x / 10"}
@@ -13,12 +15,26 @@
 		]},
 		{unit: "mm", conversions: [
 			{unit: 	"m", calc: "x / 1000"}
+		]},
+		{unit: "sm", conversions: [
+			{unit: 	"m", calc: "x * 0.71"},
+			{unit: 	"dsm", calc: "x * 10"},
+			{unit: 	"csm", calc: "x * 100"},
+			{unit: 	"msm", calc: "x * 1000"}
+		]},
+		{unit: "dsm", conversions: [
+			{unit: 	"sm", calc: "x / 10"}
+		]},
+		{unit: "csm", conversions: [
+			{unit: 	"sm", calc: "x / 100"}
+		]},
+		{unit: "msm", conversions: [
+			{unit: 	"sm", calc: "x / 1000"}
 		]}
 	];
 
 	var paths = {
 	};
-	console.log(conversions);
 
 	var conversionsLength = conversions.length;
 	for (var i = 0; i <= conversionsLength - 1; i++) {
@@ -28,17 +44,54 @@
 		var conversionLength = conversion.conversions.length;
 		for (var j = 0; j <= conversionLength - 1; j++) {
 			var singleConversion = conversion.conversions[j];
-			console.log(unit, singleConversion);
+			var steps = [unit, singleConversion.unit];
+			var calc = [singleConversion.calc];
+			addToPath(combine(unit, singleConversion.unit), steps, calc);
+			
+			checkForRoute(unit, singleConversion.unit, steps, calc);
 		}
 	}
 	addToPath("m_dm", [], "");
 	console.log("Paths", paths);
 
-	function checkForRoute () {}
+	function combine (v1, v2) {
+		return v1 + "_" + v2;
+	}
+
+	function checkForRoute (startUnit, currentUnit, steps, calc) {
+		var conversionsLength = conversions.length;
+		for (var i = 0; i <= conversionsLength - 1; i++) {
+			var conversion = conversions[i];
+			var unit = conversion.unit;
+
+			if (unit == currentUnit) {
+				var conversionLength = conversion.conversions.length;
+				for (var j = 0; j <= conversionLength - 1; j++) {
+					var newSteps = steps.slice();
+					var newCalc = calc.slice();
+					var singleConversion = conversion.conversions[j];
+					var singleConversionUnit = singleConversion.unit;
+					if (startUnit !== singleConversionUnit && steps.indexOf(singleConversionUnit) == -1) {
+						newSteps.push(singleConversionUnit);
+						newCalc.push(singleConversion.calc);
+						addToPath(combine(startUnit, singleConversionUnit), newSteps, newCalc);
+
+						checkForRoute(startUnit, singleConversionUnit, newSteps, newCalc);
+					}
+				}
+
+				break;
+			}
+		}
+	}
 
 	function addToPath (units, steps, calc) {
 		if (typeof paths[units] == "undefined") {
 			paths[units] = {steps: steps, calc: calc};
+		} else {
+			if (steps.length < paths[units].steps) {
+				paths[units] = {steps: steps, calc: calc};
+			}
 		}
 	}
 
