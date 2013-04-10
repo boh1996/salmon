@@ -1,0 +1,18 @@
+body {
+	background-color: #444;
+}
+
+.red {
+	color: #F00;
+}
+
+.giant-input {
+	font-size: 40px !important;
+	height: 40px !important;
+	width: auto !important;
+}
+
+.giant-button {
+	width: 80px !important;
+	height: 50px !important;
+}

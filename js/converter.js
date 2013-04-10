@@ -97,16 +97,5 @@ window.converter = {
 		};
 
 		return false;
-	},
-
-	countProperties :function ( obj ) {
-		var prop;
-		var propCount = 0;
-
-		for (prop in obj) {
-			propCount++;
-		}
-
-		return propCount;
 	}
 }
