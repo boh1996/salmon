@@ -140,5 +140,5 @@ var acronyms = {
 	"salmonmeters" 	: "sm",
 	"celcius"		: "c",
 	"kelvin"		: "k",
-	"fahrenheit"	: "",
+	"fahrenheit"	: "f",
 }
