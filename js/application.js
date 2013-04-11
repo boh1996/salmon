@@ -116,7 +116,7 @@ function processInput ( input ) {
 
 	if ( components === false ) return; // Show Error 
 
-	var result = convert(components.amount, components.fromUnit, components.toUnit);
+	var result = convert(components.amount, components.fromUnit.toLowerCase(), components.toUnit.toLowerCase());
 
 	if ( result === false ) return; // Show Error
 
