@@ -114,6 +114,65 @@ var conversions = [
 	{unit: "st", conversions: [
 		{unit: 	"c", calc: "x * 12"}
 	]},
+	
+	//Time
+	{unit: "h", conversions: [
+		{unit: 	"min", calc: "x * 60"},
+		{unit: 	"s", calc: "x * 60 * 60"},
+		{unit: 	"d", calc: "x / 24"},
+		{unit: 	"sh", calc: "x / 10.338"},
+	]},
+	{unit: "min", conversions: [
+		{unit: 	"h", calc: "x / 60"},
+	]},
+	{unit: "s", conversions: [
+		{unit: 	"h", calc: "x / 60 / 60"},
+	]},
+	
+	{unit: "sh", conversions: [
+		{unit: 	"smin", calc: "x * 60"},
+		{unit: 	"ss", calc: "x * 60 * 60"},
+		{unit: 	"sd", calc: "x / 24"},
+		{unit: 	"h", calc: "x * 10.338"},
+	]},
+	{unit: "smin", conversions: [
+		{unit: 	"sh", calc: "x / 60"},
+	]},
+	{unit: "ss", conversions: [
+		{unit: 	"sh", calc: "x / 60 / 60"},
+	]},
+	
+	{unit: "d", conversions: [
+		{unit: 	"h", calc: "x * 24"},
+		{unit: 	"w", calc: "x / 7"},
+		{unit: 	"mo", calc: "x / 30"},
+		{unit: 	"y", calc: "x / 365"},
+	]},
+	{unit: "w", conversions: [
+		{unit: 	"d", calc: "x * 7"},
+	]},
+	{unit: "mo", conversions: [
+		{unit: 	"d", calc: "x * 30"},
+	]},
+	{unit: "y", conversions: [
+		{unit: 	"d", calc: "x * 365"},
+	]},
+	
+	{unit: "sd", conversions: [
+		{unit: 	"sh", calc: "x * 24"},
+		{unit: 	"sw", calc: "x / 7"},
+		{unit: 	"smo", calc: "x / 30"},
+		{unit: 	"sy", calc: "x / 365"},
+	]},
+	{unit: "sw", conversions: [
+		{unit: 	"sd", calc: "x * 7"},
+	]},
+	{unit: "smo", conversions: [
+		{unit: 	"sd", calc: "x * 30"},
+	]},
+	{unit: "sy", conversions: [
+		{unit: 	"sd", calc: "x * 365"},
+	]},
 ];
 
 var acronyms = {
@@ -141,4 +200,46 @@ var acronyms = {
 	"celcius"		: "c",
 	"kelvin"		: "k",
 	"fahrenheit"	: "f",
+	"second"		: "s",
+	"seconds"		: "s",
+	"minute"		: "min",
+	"minutes"		: "min",
+	"hour"			: "h",
+	"hours"			: "h",
+	"day"			: "d",
+	"days"			: "d",
+	"week"			: "w",
+	"weeks"			: "w",
+	"month"			: "mo",
+	"months"		: "mo",
+	"year"			: "y",
+	"years"			: "y",
+	"salmonsecond"	: "ss",
+	"salmonseconds"	: "ss",
+	"salmon second"	: "ss",
+	"salmon seconds": "ss",
+	"salmonminute"	: "smin",
+	"salmonminutes"	: "smin",
+	"salmon minute"	: "smin",
+	"salmon minutes": "smin",
+	"salmonhour"	: "sh",
+	"salmonhours"	: "sh",
+	"salmon hour"	: "sh",
+	"salmon hours"	: "sh",
+	"salmonday"		: "sd",
+	"salmondays"	: "sd",
+	"salmon day"	: "sd",
+	"salmon days"	: "sd",
+	"salmonweek"	: "sw",
+	"salmonweeks"	: "sw",
+	"salmon week"	: "sw",
+	"salmon weeks"	: "sw",
+	"salmonmonth"	: "smo",
+	"salmonmonths"	: "smo",
+	"salmon month"	: "smo",
+	"salmon months"	: "smo",
+	"salmonyear"	: "sy",
+	"salmonyears"	: "sy",
+	"salmon year"	: "sy",
+	"salmon years"	: "sy",
 }
