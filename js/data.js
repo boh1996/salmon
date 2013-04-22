@@ -5,7 +5,7 @@ var conversions = [
 		{unit: 	"dm", calc: "x * 10"},
 		{unit: 	"cm", calc: "x * 100"},
 		{unit: 	"mm", calc: "x * 1000"},
-		{unit: 	"in", calc: "x * 0.0254"},
+		{unit: 	"in", calc: "x / 0.0254"},
 		{unit: 	"ft", calc: "x / 0.3048"},
 		{unit: 	"mi", calc: "x / 1.609344"},
 		{unit: 	"sm", calc: "x / 0.71"}
@@ -23,7 +23,7 @@ var conversions = [
 		{unit: 	"m", calc: "x / 1000"}
 	]},
 	{unit: "in", conversions: [
-		{unit: 	"m", calc: "x / 0.0254"}
+		{unit: 	"m", calc: "x * 0.0254"}
 	]},
 	{unit: "ft", conversions: [
 		{unit: 	"m", calc: "x * 0.3048"}
