@@ -145,14 +145,14 @@ var conversions = [
 	{unit: "d", conversions: [
 		{unit: 	"h", calc: "x * 24"},
 		{unit: 	"w", calc: "x / 7"},
-		{unit: 	"mo", calc: "x / 30"},
+		{unit: 	"mo", calc: "x / 30.4368499"},
 		{unit: 	"y", calc: "x / 365"},
 	]},
 	{unit: "w", conversions: [
 		{unit: 	"d", calc: "x * 7"},
 	]},
 	{unit: "mo", conversions: [
-		{unit: 	"d", calc: "x * 30"},
+		{unit: 	"d", calc: "x * 30.4368499"},
 	]},
 	{unit: "y", conversions: [
 		{unit: 	"d", calc: "x * 365"},
