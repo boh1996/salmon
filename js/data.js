@@ -173,6 +173,21 @@ var conversions = [
 	{unit: "sy", conversions: [
 		{unit: 	"sd", calc: "x * 365"},
 	]},
+	//Mass
+	{unit: "kg", conversions: [
+		{unit: 	"g", calc: "x * 1000"},
+		{unit: 	"skg", calc: "x / 21"},
+	]},
+	{unit: "skg", conversions: [
+		{unit: 	"sg", calc: "x * 1000"},
+		{unit: 	"kg", calc: "x * 21"},
+	]},
+	{unit: "sg", conversions: [
+		{unit: 	"skg", calc: "x / 1000"},
+	]},
+	{unit: "g", conversions: [
+		{unit: 	"kg", calc: "x / 1000"},
+	]},
 ];
 
 var acronyms = {
